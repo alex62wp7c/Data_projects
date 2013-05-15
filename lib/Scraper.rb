@@ -4,19 +4,20 @@ require 'nokogiri'
 class Scraper
   
 
-  def self.getTableData
-    download = open("http://www.dol.gov/olms/regs/compliance/cba/Cba_CaCn.htm")
+  def self.getTableData (twitterHandle)
+    download = open(twitterHandle)
 
     html = Nokogiri::HTML(download)
-    tables = html.search("table")
-    table = tables[1]
-    tds = []
-    table.search('tr')[1..4].each do |tr|
-      tr.search('td').each do |td|
-        tds.push(td.text)
-      end
-    end
-    return tds
+    headlines = html.search(".content")
+    return headlines
+    # table = tables[1]
+    # tds = []
+    # table.search('tr')[1..4].each do |tr|
+    #   tr.search('td').each do |td|
+    #     tds.push(td.text)
+    #   end
+    # end
+    # return tds
   end
 
 end
